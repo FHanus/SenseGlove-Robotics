@@ -57,7 +57,7 @@ int main()
 	//---------------------------------------------------------------------------
 	// SGCoreCpp  - Parts taken from the SGCoreCpp example code.
 
-	{
+		{
 		// For a more practical example: Let's assume this is 1 frame of your simulation.
 		// You've defined which glove you want to use (left/right) - in this case, let's use the same side as our testGlove.
 		std::shared_ptr<SGCore::HapticGlove> glove;
@@ -94,8 +94,9 @@ int main()
 					std::cout << "Something went wrong trying to access the HandPose of " + glove->ToString() + ". Try again later.";
 					std::this_thread::sleep_for(std::chrono::seconds(1));
 				}
+				
+
 			}
-	}
 
 
 	//---------------------------------------------------------------------------
