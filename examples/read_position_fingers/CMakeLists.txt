@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(PositionReader)
+project(read_position_fingers)
 
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
@@ -21,7 +21,7 @@ include_directories(
 )
 
 # Define the executable
-add_executable(${PROJECT_NAME} position_reader.cpp)
+add_executable(${PROJECT_NAME} read_position_fingers.cpp)
 
 # Link the SGCoreCpp and SGConnect libraries using full paths
 target_link_libraries(${PROJECT_NAME}

@@ -6,4 +6,6 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add subdirectories here
-add_subdirectory(examples/position_reader)
+add_subdirectory(examples/read_position)
+add_subdirectory(examples/read_position_fingers)
+add_subdirectory(examples/send_force)
