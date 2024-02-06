@@ -45,11 +45,3 @@ If you encounter any issues during the connection process, consider the followin
     Verify that Bluetooth is enabled on your computer.
     Confirm that the NOVA glove is in pairing mode.
     Check that the SenseCom.x86_64 executable is in the correct location.
-
-**Additional Resources**
-
-For more information, user manuals, or support, please visit our SenseGlove-Robotics Documentation or contact our Support Team.
-
-**License**
-
-This project is licensed under the MIT License.
