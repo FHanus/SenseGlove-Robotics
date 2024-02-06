@@ -1,15 +1,8 @@
-# SenseGlove-Robotics
-
-## Overview
+# SenseGlove-Robotics Scripts
 
 SenseGlove-Robotics is a project designed to enable to connect the NOVA glove and use it to control a robotic arm. This script has been developed and tested specifically for use with SenseGlove Nova 1.
 
-## Prerequisites
-
-This was developed with:
-
-- Ubuntu 22.04
-- SenseGlove Nova 1
+Below are the scripts to streamline the usage.
 
 ## Connect the glove
 
