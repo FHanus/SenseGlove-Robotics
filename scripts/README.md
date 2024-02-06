@@ -41,7 +41,8 @@ Note: Ensure that you have the necessary permissions to execute the script with 
 
 If you encounter any issues during the connection process, consider the following troubleshooting steps:
 
-    Ensure your NOVA glove is charged and powered on.
-    Verify that Bluetooth is enabled on your computer.
-    Confirm that the NOVA glove is in pairing mode.
-    Check that the SenseCom.x86_64 executable is in the correct location.
+Ensure your NOVA glove is charged and powered on.
+Verify that Bluetooth is enabled on your computer.
+Confirm that the NOVA glove is in pairing mode (blue light blinking).
+Check that the SenseCom.x86_64 executable is in the correct location.
+Try the commands from the .sh file one by one to debug the potential local Bluetooth problems.
