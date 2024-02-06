@@ -70,49 +70,9 @@ int main()
 				SGCore::HandPose handPose; //The handPose class contains all data you'll need to animate a virtual hand
 				if (glove->GetHandPose(handPose)) //returns the HandPose based on the latest device data, using the latest Profile and the default HandGeometry
 				{
-					//Step 3: Haptics
-
-					// Let's say we've animated our hand, and determined that we need a force the index finger
-					// Force is defined between 0% and 100% of the force.
-
-					std::cout << "We've determined that we want Force-Feedback on the Index finger. Press Return to apply it." << std::endl;
-					system("pause");
-
-					//We create a new Force-Feedback Command
-					SGCore::Haptics::SG_FFBCmd ffb(0, 100, 0, 0, 0); //sets each of the fingers to a desired level [thumb ... pinky]
-					glove->SendHaptics(ffb); //and send it to the SendHaptics Command
-
-					// In a normal scenario, you'll send the up to date levels each frame. Note that the glove will only respond to the latest command. They are not cumulative!
-					// E.g. when calling
-					// glove.SendHaptics( new SGCore.Haptics.SG_FFBCmd(0, 100, 0, 100, 0) );
-					// glove.SendHaptics( new SGCore.Haptics.SG_FFBCmd(100, 80, 0, 0, 0) );
-					// Only the last command is sent to the glove. FFB on the ring finger will not turn on.
-
-					std::cout << std::endl;
-					std::cout << "Now that the Force-Feedback is on, you can press Return again to cancel it." << std::endl;
-					system("pause");
-
-					glove->StopHaptics(); //turns off all Vibration and Force-Feedback. 
-					// Alternatively, you could call glove->SendHaptics(SGCore::Haptics::SG_FFBCmd::off);
-
-					//If we wanted to send vibration to the fingers, we send a BuzzCmd:
-					SGCore::Haptics::SG_BuzzCmd buzz(0, 100, 0, 0, 0); //sets each of the fingers to a desired level [thumb ... pinky]
-
-					std::cout << std::endl;
-					std::cout << "Let's send some vibrations; press Return to vibrate the Index finger." << std::endl;
-					system("pause");
-
-					glove->SendHaptics(buzz);
-
-					// Normally, you'd need to keep track of how long you want the glove to vibrate. Use callbacks or events. In this console app, we'll use Sleep();
+					SGCore::Haptics::SG_BuzzCmd buzz(100, 100, 100, 100, 100); //sets each of the fingers to a desired level [thumb ... pinky]
+					glove->SendHaptics(buzz); //and send it to the SendHaptics Command
 					std::this_thread::sleep_for(std::chrono::milliseconds(500));
-
-					glove->StopVibrations(); //Stops all vibrations on the glove.
-					// Alternatively, we could have used glove.SendHaptics(SGCore.Haptics.SG_BuzzCmd.Off);
-
-					std::cout << "That was a brief introduction into Tracking and Haptics. Check out more examples at docs.senseglove.com!" << std::endl;
-
-					std::this_thread::sleep_for(std::chrono::seconds(1));
 				}
 				else //This function could return false if no data for this glove is available (yet).
 				{

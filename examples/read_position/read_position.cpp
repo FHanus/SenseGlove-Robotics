@@ -10,6 +10,23 @@
 #include <thread>
 #include <chrono> //wait untill we find SenseGloves
 
+
+#include "SGCore.h"
+#include "SGDevice.h"
+
+#include "SG_FFBCmd.h"
+#include "SG_BuzzCmd.h"
+#include "ThumperCmd.h"
+#include "Quat.h"
+#include "BasicHandModel.h"
+#include "HandPose.h"
+#include "HandProfile.h"
+#include "DeviceList.h"
+#include "Vect3D.h"
+#include "Tracking.h"
+
+#include <vector>
+
 int main()
 {
 	std::cout << "Standalone Communications using " << SGConnect::GetLibraryVersion() << " and " << SGCore::Library::Version() << std::endl;
@@ -67,48 +84,15 @@ int main()
 			std::cout << "Glove detected: " << glove->ToString() << std::endl;
 			// We want to get the pose of the hand - to animate a virtual model
 			while (true) {
-				SGCore::HandPose handPose; //The handPose class contains all data you'll need to animate a virtual hand
-				if (glove->GetHandPose(handPose)) //returns the HandPose based on the latest device data, using the latest Profile and the default HandGeometry
-				{
-					std::cout << "Retrieved the latest Hand Pose from " + glove->ToString() + ". The ToString() function reports important finger angles, in degrees, in our coodinate system:" << std::endl;
-					std::cout << handPose.ToString() << std::endl;
-
-					// The HandPose is still in our Coordinate System, relative to the wrist.
-					// You'll need to convert our Vect3D and Quats to your own coordinate system. You can find an explanation of our Coordinate system at docs.senseglove.com/
-
-					// We also offer "normalized" angles : Which gives you the total flexion of the finger(s) as a value between 0 and 1,
-					// where 0 represents the fingers fully extended, and 1 represents the finger fully flexed.
-					std::vector<float> flexions = handPose.GetNormalizedFlexion();
-					std::string flexes = "";
-					for (int i = 0; i < flexions.size(); i++)
-					{
-						flexes += std::to_string((int)std::round(flexions[i]));
-						if (i < flexions.size() - 1) { flexes += ", "; }
-					}
-					std::cout << "Normalized finger flexions [" + flexes + "]" << std::endl;
-					std::cout << std::endl;
-
-					//Step 2: Wrist Location
-
-					// The glove does not come with a built-in hand tracking. I want to know the location of the wrist in 3D space - to determine my finger locations, for example.
-					// Let's say we've connected a Vive Tracker to the glove - and we know it's position / location
-					SGCore::PosTrackingHardware tracker = SGCore::PosTrackingHardware::ViveTracker;
-					SGCore::Kinematics::Vect3D trackerPosition = SGCore::Kinematics::Vect3D::zero; //set at 0, 0, 0
-					SGCore::Kinematics::Quat trackerRotation = SGCore::Kinematics::Quat::identity; //no rotation either.
-
-					SGCore::Kinematics::Vect3D wristPosition;
-					SGCore::Kinematics::Quat wristRotation;
-					glove->GetWristLocation(trackerPosition, trackerRotation, tracker, wristPosition, wristRotation);
-
-					std::cout << "If your tracked device (" + SGCore::Tracking::ToString(tracker) + ") is at position " + trackerPosition.ToString() + ", and rotation " + trackerRotation.ToEuler().ToString()
-						+ ", your wrist position is " + wristPosition.ToString() + ", with rotation at " + wristRotation.ToEuler().ToString() << std::endl;
-					std::cout << std::endl;
-
+				SGCore::Kinematics::Quat handOrientation;
+				if(glove->GetIMURotation(handOrientation)){
+					std::cout << "Retrieved the latest IMU rotation from " + glove->ToString() + ". The ToString() function reports important finger angles, in degrees, in our coodinate system:" << std::endl;
+					std::cout << handOrientation.ToString() << std::endl;
+					
 					std::this_thread::sleep_for(std::chrono::seconds(1));
 				}
-				else //This function could return false if no data for this glove is available (yet).
-				{
-					std::cout << "Something went wrong trying to access the HandPose of " + glove->ToString() + ". Try again later.";
+				else{
+					std::cout << "Something went wrong trying to access the IMU rotation of " + glove->ToString() + ". Try again later.";
 					std::this_thread::sleep_for(std::chrono::seconds(1));
 				}
 			}
