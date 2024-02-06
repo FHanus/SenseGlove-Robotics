@@ -14,3 +14,8 @@ This was developed with:
 ## Connect the glove
 
 Navigate to the 'scripts' folder and follow the instructions to connect the glove.
+
+
+## Run example scripts
+
+Navigate to the 'examples' to find scripts made for testing the glove and instructions on how to use them.
