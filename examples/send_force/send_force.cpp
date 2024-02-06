@@ -61,24 +61,33 @@ int main()
 		// For a more practical example: Let's assume this is 1 frame of your simulation.
 		// You've defined which glove you want to use (left/right) - in this case, let's use the same side as our testGlove.
 		std::shared_ptr<SGCore::HapticGlove> glove;
+		int c;
 		if (SGCore::HapticGlove::GetGlove(glove))
 		{
 			//Step 1: Hand Pose
 			std::cout << "Glove detected: " << glove->ToString() << std::endl;
 			// We want to get the pose of the hand - to animate a virtual model
 			while (true) {
-				SGCore::HandPose handPose; //The handPose class contains all data you'll need to animate a virtual hand
-				if (glove->GetHandPose(handPose)) //returns the HandPose based on the latest device data, using the latest Profile and the default HandGeometry
-				{
-					SGCore::Haptics::SG_BuzzCmd buzz(100, 100, 100, 100, 100); //sets each of the fingers to a desired level [thumb ... pinky]
-					glove->SendHaptics(buzz); //and send it to the SendHaptics Command
-					std::this_thread::sleep_for(std::chrono::milliseconds(500));
-				}
-				else //This function could return false if no data for this glove is available (yet).
-				{
-					std::cout << "Something went wrong trying to access the HandPose of " + glove->ToString() + ". Try again later.";
-					std::this_thread::sleep_for(std::chrono::seconds(1));
-				}
+				std::cout << "We've determined that we want Force-Feedback on the Index finger. Press Return to apply it." << std::endl;
+				c = getchar();
+				//system("pause");
+
+				//We create a new Force-Feedback Command
+				SGCore::Haptics::SG_FFBCmd ffb(50, 100, 25, 25, 0); //sets each of the fingers to a desired level [thumb ... pinky]
+				glove->SendHaptics(ffb); //and send it to the SendHaptics Command
+
+				// In a normal scenario, you'll send the up to date levels each frame. Note that the glove will only respond to the latest command. They are not cumulative!
+				// E.g. when calling
+				// glove.SendHaptics( new SGCore.Haptics.SG_FFBCmd(0, 100, 0, 100, 0) );
+				// glove.SendHaptics( new SGCore.Haptics.SG_FFBCmd(100, 80, 0, 0, 0) );
+				// Only the last command is sent to the glove. FFB on the ring finger will not turn on.
+
+				std::cout << std::endl;
+				std::cout << "Now that the Force-Feedback is on, you can press Return again to cancel it." << std::endl;
+				c = getchar();
+				//system("pause");
+
+				glove->StopHaptics(); //turns off all Vibration and Force-Feedback. 
 			}
 
 
