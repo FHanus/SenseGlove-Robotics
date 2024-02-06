@@ -8,32 +8,32 @@ Below are the scripts to streamline the usage.
 
 1. **Navigate to the `scripts` folder where the `glove_connect.sh` script is located:**
 
-    ```bash
-    cd scripts
-    ```
+```bash
+cd scripts
+```
 
 2. **Make the script executable:**
 
-    ```bash
-    chmod +x glove_connect.sh
-    ```
+```bash
+chmod +x glove_connect.sh
+```
 
 3. **Run the script with sudo:**
 
-    ```bash
-    sudo ./glove_connect.sh
-    ```
+```bash
+sudo ./glove_connect.sh
+```
 
-    The script will perform the following steps:
-        List Bluetooth devices and prompt you to enter the MAC address of your PC.
-        List Bluetooth devices again and prompt you to copy the MAC address of the NOVA glove from the list.
-        Connect to the NOVA glove.
-        Check if the SenseCom_Linux directory exists and extract it from ZIP if necessary.
-        Run the SenseCom.x86_64 executable.
+The script will perform the following steps:
+    List Bluetooth devices and prompt you to enter the MAC address of your PC.
+    List Bluetooth devices again and prompt you to copy the MAC address of the NOVA glove from the list.
+    Connect to the NOVA glove.
+    Check if the SenseCom_Linux directory exists and extract it from ZIP if necessary.
+    Run the SenseCom.x86_64 executable.
 
-    If the glove LED turns solid blue, the SenseCom window will appear. Keep this window open, perform glove calibration, and wait for the glove to connect.
+If the glove LED turns solid blue, the SenseCom window will appear. Keep this window open, perform glove calibration, and wait for the glove to connect.
 
-    If the glove LED doesn't turn solid blue, exit the script, and try running it again. If the issue persists, you may need to debug your Bluetooth locally.
+If the glove LED doesn't turn solid blue, exit the script, and try running it again. If the issue persists, you may need to debug your Bluetooth locally.
 
 Note: Ensure that you have the necessary permissions to execute the script with sudo.
 
