@@ -1,5 +1,0 @@
-/home/filiphanus/workspace/SenseGlove-Robotics/build/CMakeFiles/edit_cache.dir
-/home/filiphanus/workspace/SenseGlove-Robotics/build/CMakeFiles/rebuild_cache.dir
-/home/filiphanus/workspace/SenseGlove-Robotics/build/examples/position_reader/CMakeFiles/PositionReader.dir
-/home/filiphanus/workspace/SenseGlove-Robotics/build/examples/position_reader/CMakeFiles/edit_cache.dir
-/home/filiphanus/workspace/SenseGlove-Robotics/build/examples/position_reader/CMakeFiles/rebuild_cache.dir
