@@ -16,8 +16,6 @@ Before you begin, ensure you have the following prerequisites installed on your 
     cmake --version
     ```
 
-If not installed, you can install it with:
-
 4. **C++ Compiler: Make sure you have a C++ compiler (e.g., g++) installed:**
 
     ```bash
